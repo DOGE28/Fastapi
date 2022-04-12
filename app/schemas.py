@@ -1,6 +1,7 @@
 from datetime import datetime
 from typing import Optional
 from pydantic import BaseModel, EmailStr, conint
+from fastapi import Form
 
 class PostBase(BaseModel):
     title: str
@@ -27,8 +28,8 @@ class Post(PostBase):
         orm_mode = True
 
 class UserCreate(BaseModel):
-    email: EmailStr
-    password: str
+    email: EmailStr = Form(...)
+    password: str = Form(...)
 
 class UserLogin(BaseModel):
     email: EmailStr
