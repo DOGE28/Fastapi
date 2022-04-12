@@ -28,8 +28,8 @@ class Post(PostBase):
         orm_mode = True
 
 class UserCreate(BaseModel):
-    email: EmailStr = Form(...)
-    password: str = Form(...)
+    email: EmailStr
+    password: str
 
 class UserLogin(BaseModel):
     email: EmailStr
