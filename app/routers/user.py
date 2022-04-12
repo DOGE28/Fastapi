@@ -1,5 +1,5 @@
 from typing import Optional, List
-from fastapi import Body, FastAPI, Response, status, HTTPException, Depends, APIRouter
+from fastapi import status, HTTPException, Depends, APIRouter, Form
 from pydantic import BaseModel
 from random import randrange
 import psycopg2
@@ -15,7 +15,7 @@ router = APIRouter(
 )
 
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=schemas.UserOut)
-def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
+def create_user(user: schemas.UserCreate = Form(...), db: Session = Depends(get_db)):
 
     #hash the password - user.password
     hashed_password = utils.hash(user.password)
